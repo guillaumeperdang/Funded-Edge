@@ -16,7 +16,7 @@ import os
 
 app = Flask(__name__)
 # CORS: Allow Localhost (Frontend) and Render Domains
-CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "https://*.onrender.com"]}})
+CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://localhost:5173", "https://*.onrender.com"]}})
 
 def setup_driver():
     chrome_options = Options()
