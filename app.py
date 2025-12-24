@@ -20,6 +20,8 @@ CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://lo
 
 def setup_driver():
     chrome_options = Options()
+    # Point to System Chromium
+    chrome_options.binary_location = "/usr/bin/chromium"
     # Headless Options for Server Environment
     chrome_options.add_argument("--headless") 
     chrome_options.add_argument("--no-sandbox")
@@ -29,7 +31,7 @@ def setup_driver():
     chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
     chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_experimental_option('useAutomationExtension', False)
-    service = Service(ChromeDriverManager().install())
+    service = Service("/usr/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 
