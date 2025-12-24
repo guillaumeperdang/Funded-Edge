@@ -22,14 +22,18 @@ def setup_driver():
     chrome_options = Options()
     # Point to System Chromium
     chrome_options.binary_location = "/usr/bin/chromium"
-    # Headless Options for Server Environment
+    # Headless Options for Server Environment (Memory Optimized)
     chrome_options.add_argument("--headless") 
     chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-dev-shm-usage") # Crucial for Docker
     chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--window-size=2560,1440")
+    chrome_options.add_argument("--disable-extensions")
+    chrome_options.add_argument("--disable-infobars")
+    chrome_options.add_argument("--disable-notifications")
+    chrome_options.add_argument("--dns-prefetch-disable")
+    chrome_options.page_load_strategy = 'eager' # Don't wait for full load
+    chrome_options.add_argument("--window-size=1920,1080")
     chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
-    chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
     chrome_options.add_experimental_option('useAutomationExtension', False)
     service = Service("/usr/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=chrome_options)
