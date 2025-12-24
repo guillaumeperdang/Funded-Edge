@@ -33,4 +33,4 @@ COPY . .
 EXPOSE 5000
 
 # Start Command using Gunicorn
-CMD gunicorn app:app --bind 0.0.0.0:$PORT
+CMD gunicorn app:app --bind 0.0.0.0:$PORT --timeout 600 --workers 1
